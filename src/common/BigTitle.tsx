@@ -4,14 +4,14 @@ import { TouchableOpacity } from "react-native";
 
 const Wrapper = styled.View`
   flex-direction: row;
-  padding: 10px 20px;
+  padding: 20px;
   align-items: center;
   justify-content: space-between;
   width: 100%;
 `;
 
 const TitleText = styled.Text`
-  font-size: 22px;
+  font-size: 29px;
   font-weight: bold;
   color: ${({ theme }) => theme.text};
 `;
