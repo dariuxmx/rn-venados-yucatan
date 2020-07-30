@@ -7,19 +7,18 @@ import { ScrollView, RefreshControl } from "react-native";
 import styled from "styled-components/native";
 import { STATES } from "../constants";
 import useAppState from "../hooks/useAppState";
-import HeaderTitleLogo from "../common/HeaderTitleLogo";
-import SegmentedControl from '@react-native-community/segmented-control';
-import GamesStore from '../stores/Games';
-import MatchGamePreview from "../components/MatchGamePreview";
+import StatisticsStore from '../stores/Statistics';
+import StatisticPreview from "../components/StatisticPreview";
 import ErrorCard from "../common/ErrorCard";
 import Loader from "../common/Loader";
+import BigTitle from "../common/BigTitle";
 
-const Dashboard = observer(() => {
-  const gameStore = useContext(GamesStore);
+const Statistics = observer(() => {
+  const statisticStore = useContext(StatisticsStore);
   const { colors } = useTheme();
 
   const loadData = () => {
-    gameStore.loadArticles();
+    statisticStore.loadArticles();
   };
 
   useEffect(() => {
@@ -31,7 +30,7 @@ const Dashboard = observer(() => {
   });
 
   const renderScreenContent = () => {
-    switch (gameStore.state) {
+    switch (statisticStore.state) {
       case STATES.IDLE:
       case STATES.LOADING:
         return <Loader />;
@@ -45,10 +44,11 @@ const Dashboard = observer(() => {
       default:
         return (
           <>
-            {gameStore.news.map((match, index) => {
+            {statisticStore.news.map((statisticData, index) => {
+              // console.log("=======" + JSON.stringify(statisticData));
               return (
-                <MatchGamePreview key={index}
-                  matchGame={match}
+                <StatisticPreview key={index}
+                  statistic={statisticData}
                 />
               );
             })}
@@ -60,33 +60,19 @@ const Dashboard = observer(() => {
   
   return (
     <Wrapper>
-      <HeaderTitleLogo />
-      <SegmentedControl
-        values={['COPA MX', 'ASCENSO MX']}
-        enabled={true}
-        tintColor='yellow'
-        backgroundColor='green'
-        activeFontStyle={{
-          color: 'green',
-        }}
-        style={{height: 40, width: '92%'}}
-        fontStyle={{
-          fontSize: 19,
-        }}
-        selectedIndex={0}
-      />
       <ScrollView
         scrollEnabled={true}
         style={{ width: "100%" }}
         contentContainerStyle={{ flex: 0 }}
         refreshControl={
           <RefreshControl
-            refreshing={gameStore.state === STATES.LOADING}
+            refreshing={statisticStore.state === STATES.LOADING}
             onRefresh={loadData}
             tintColor={colors.uiAccent}
           />
         }
       >
+        <BigTitle title="Statistics League" />
         <Container>
           { renderScreenContent() }
         </Container>
@@ -95,7 +81,7 @@ const Dashboard = observer(() => {
   );
 })
 
-export default Dashboard;
+export default Statistics;
 
 const Wrapper = styled.SafeAreaView`
   align-items: center;
