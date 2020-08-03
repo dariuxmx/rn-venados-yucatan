@@ -1,31 +1,33 @@
 import React, { Component } from 'react';
-import { View, StyleSheet, Image, Text } from 'react-native';
-import { Icon } from 'react-native-elements';
-
 import { createDrawerNavigator, DrawerItem } from '@react-navigation/drawer';
+import BigTitle from '../common/BigTitle';
+import { Avatar, Title, Caption, Paragraph, Drawer, Text, TouchableRipple } from 'react-native-paper';
+import { createStackNavigator } from '@react-navigation/stack';
+import Dashboard from '../screens/Dashboard';
+import Statistics from "../screens/Statistics";
+import Players from "../screens/Players";
 
-const Drawer = createDrawerNavigator();
+// const Drawer = createDrawerNavigator();
+const StackNavigator =  createStackNavigator();
 
-const Menu = ({ option1, option2, option3 }) => {
+const Menu = () => {
   return (
-    <Drawer.Navigator initialRouteName="Feed">
-      <Drawer.Screen
-        name="Feed"
-        component={option1}
-        options={{ drawerLabel: 'Home' }}
+    <StackNavigator.Navigator>
+      <StackNavigator.Screen
+        name="Home"
+        component={Dashboard}
       />
-      <Drawer.Screen
-        name="Notifications"
-        component={option2}
-        options={{ drawerLabel: 'Updates' }}
+      <StackNavigator.Screen
+        name="Statistics"
+        component={Statistics}
       />
-      <Drawer.Screen
-        name="Profile"
-        component={option3}
-        options={{ drawerLabel: 'Profile' }}
+      <StackNavigator.Screen
+        name="Players"
+        component={Players}
       />
-    </Drawer.Navigator>
+    </StackNavigator.Navigator>
   );
 }
+
 
 export default Menu;
