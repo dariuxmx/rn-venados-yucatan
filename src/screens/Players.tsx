@@ -3,7 +3,7 @@ import { observer } from "mobx-react";
 import {
   useTheme
 } from "@react-navigation/native";
-import { ScrollView, RefreshControl } from "react-native";
+import { ScrollView, RefreshControl, TouchableHighlight } from "react-native";
 import styled from "styled-components/native";
 import { STATES } from "../constants";
 import useAppState from "../hooks/useAppState";
@@ -16,7 +16,7 @@ import BigTitle from "../common/BigTitle";
 const Players = observer(() => {
   const playersStore = useContext(PlayersStore);
   const { colors } = useTheme();
-
+  
   const loadData = () => {
     playersStore.loadArticles();
   };
@@ -28,7 +28,6 @@ const Players = observer(() => {
   useAppState({
     onForeground: () => loadData(),
   });
-
 
 
   const renderForwardPlayersContent = () => {
@@ -47,7 +46,6 @@ const Players = observer(() => {
       default:
         return (
           <>
-          {/* {console.log("FORWARDS >>> " + JSON.stringify(playersStore.news.forwards[0]))} */}
             {dataMapped.forwards.map((player, index) => {
               // {console.log("FORWARDS >>> " + JSON.stringify(player))}
               return (
@@ -147,7 +145,6 @@ const Players = observer(() => {
         );
     }
   };
-  
 
   return (
     <RootContainer>
@@ -165,7 +162,6 @@ const Players = observer(() => {
             horizontal={ true }
             showsHorizontalScrollIndicator= { false }
           >
-            
             { renderForwardPlayersContent() }
           </ScrollView>
         </RowCardsContainer> 
@@ -230,9 +226,7 @@ const RootContainer = styled.View`
     background: ${({ theme }) => theme.background};
 `;
 
-
 const Wrapper = styled.SafeAreaView`
-  
 `;
 
 const RowCardsContainer = styled.View`
