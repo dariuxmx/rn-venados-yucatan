@@ -52,7 +52,7 @@ const App = observer(() => {
         <NavigationContainer theme={theme}>
           <StatusBar barStyle={statusBarStyle} />
           <Drawer.Navigator drawerContent={DrawerOptions} >
-            <Drawer.Screen name="Home" component={ Menu }/>
+            <Drawer.Screen name="Home" component={ Menu } />
             {/* <Drawer.Screen name="Statistics" component={Statistics} />
             <Drawer.Screen name="Players" component={Players} /> */}
           </Drawer.Navigator>

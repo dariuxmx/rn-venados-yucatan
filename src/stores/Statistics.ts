@@ -17,7 +17,7 @@ class Statistics {
     fetch(`${API_URL}/statistics`, object)
       .then((data) => data.json())
       .then((data) => {
-        console.log("@@@@ --> " + JSON.stringify(data.data.statistics));
+        // console.log("@@@@ --> " + JSON.stringify(data.data.statistics));
         let statisticsTopArray = data.data.statistics;
         this.news = statisticsTopArray;
         this.state = STATES.SUCCESS;

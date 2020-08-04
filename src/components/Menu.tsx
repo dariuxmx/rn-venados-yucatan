@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
-import { createDrawerNavigator, DrawerItem } from '@react-navigation/drawer';
-import BigTitle from '../common/BigTitle';
-import { Avatar, Title, Caption, Paragraph, Drawer, Text, TouchableRipple, Button } from 'react-native-paper';
 import { createStackNavigator } from '@react-navigation/stack';
 import Dashboard from '../screens/Dashboard';
 import Statistics from "../screens/Statistics";
 import Players from "../screens/Players";
+import { IconButton, Colors } from 'react-native-paper';
+
 
 // const Drawer = createDrawerNavigator();
 const StackNavigator =  createStackNavigator();
@@ -18,7 +17,7 @@ const Menu = ({ navigation }) => {
         component={Dashboard}
         options={{
           headerLeft: () => {
-            <Button icon="camera" onPress={() => navigation.toggleDrawer()}/>
+            return <IconButton icon="menu" onPress={() => navigation.openDrawer()}/>
           }
         }}
       />
@@ -27,7 +26,7 @@ const Menu = ({ navigation }) => {
         component={Statistics}
         options={{
           headerLeft: () => {
-            <Button icon="camera" onPress={() => navigation.toggleDrawer()}/>
+            return <IconButton icon="menu" onPress={() => navigation.openDrawer()}/>
           }
         }}
       />
@@ -36,13 +35,12 @@ const Menu = ({ navigation }) => {
         component={Players}
         options={{
           headerLeft: () => {
-            <Button icon="camera" onPress={() => navigation.toggleDrawer()}/>
+            return <IconButton icon="menu" onPress={() => navigation.openDrawer()}/>
           }
         }}
       />
     </StackNavigator.Navigator>
   );
 }
-
 
 export default Menu;
