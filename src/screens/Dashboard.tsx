@@ -56,7 +56,6 @@ const Dashboard = observer(() => {
         );
     }
   };
-
   
   return (
     <Wrapper>

@@ -8,18 +8,17 @@ let object = {
     }
   };
 
-class Statistics {
+class Players {
   state = STATES.IDLE;
   news = [];
 
   loadArticles = () => {
     this.state = STATES.LOADING;
-    fetch(`${API_URL}/statistics`, object)
+    fetch(`${API_URL}/players`, object)
       .then((data) => data.json())
       .then((data) => {
-        // console.log("@@@@ --> " + JSON.stringify(data.data.statistics));
-        let statisticsTopArray = data.data.statistics;
-        this.news = statisticsTopArray;
+        let teamArray = data.data.team;
+        this.news = teamArray;
         this.state = STATES.SUCCESS;
       })
       .catch((err) => {
@@ -28,9 +27,9 @@ class Statistics {
   };
 }
 
-decorate(Statistics, {
+decorate(Players, {
   state: observable,
   news: observable,
 });
 
-export default createContext(new Statistics());
+export default createContext(new Players());

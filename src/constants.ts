@@ -3,6 +3,8 @@ export enum STATES {
     LOADING,
     SUCCESS,
     ERROR,
+    INVISIBLE,
+    VISIBLE,
   }
   
 export const HEADER_HEIGHT = 50;

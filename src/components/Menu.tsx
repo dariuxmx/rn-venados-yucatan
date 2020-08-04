@@ -1,30 +1,45 @@
 import React, { Component } from 'react';
-import { View, StyleSheet, Image, Text } from 'react-native';
-import { Icon } from 'react-native-elements';
+import { createStackNavigator } from '@react-navigation/stack';
+import Dashboard from '../screens/Dashboard';
+import Statistics from "../screens/Statistics";
+import Players from "../screens/Players";
+import { IconButton, Colors } from 'react-native-paper';
 
-import { createDrawerNavigator, DrawerItem } from '@react-navigation/drawer';
 
-const Drawer = createDrawerNavigator();
+// const Drawer = createDrawerNavigator();
+const StackNavigator =  createStackNavigator();
 
-const Menu = ({ option1, option2, option3 }) => {
+const Menu = ({ navigation }) => {
   return (
-    <Drawer.Navigator initialRouteName="Feed">
-      <Drawer.Screen
-        name="Feed"
-        component={option1}
-        options={{ drawerLabel: 'Home' }}
+    <StackNavigator.Navigator>
+      <StackNavigator.Screen
+        name="Home"
+        component={Dashboard}
+        options={{
+          headerLeft: () => {
+            return <IconButton icon="menu" onPress={() => navigation.openDrawer()}/>
+          }
+        }}
       />
-      <Drawer.Screen
-        name="Notifications"
-        component={option2}
-        options={{ drawerLabel: 'Updates' }}
+      <StackNavigator.Screen
+        name="Statistics"
+        component={Statistics}
+        options={{
+          headerLeft: () => {
+            return <IconButton icon="menu" onPress={() => navigation.openDrawer()}/>
+          }
+        }}
       />
-      <Drawer.Screen
-        name="Profile"
-        component={option3}
-        options={{ drawerLabel: 'Profile' }}
+      <StackNavigator.Screen
+        name="Players"
+        component={Players}
+        options={{
+          headerLeft: () => {
+            return <IconButton icon="menu" onPress={() => navigation.openDrawer()}/>
+          }
+        }}
       />
-    </Drawer.Navigator>
+    </StackNavigator.Navigator>
   );
 }
 

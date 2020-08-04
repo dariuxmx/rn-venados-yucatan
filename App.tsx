@@ -12,24 +12,17 @@ import { ThemeProvider } from "styled-components/native";
 import { NavigationContainer } from '@react-navigation/native';
 import AppState from "./src/stores/AppState";
 import { observer } from "mobx-react";
-// import { createStackNavigator } from '@react-navigation/stack';
+import { createDrawerNavigator } from '@react-navigation/drawer';
 import Menu from "./src/components/Menu";
-import Dashboard from './src/screens/Dashboard';
-import Statistics from "./src/screens/Statistics";
+import DrawerOptions from "./src/components/DrawerOptions";
+// import Dashboard from './src/screens/Dashboard';
+// import Statistics from "./src/screens/Statistics";
+import Players from "./src/screens/Players";
 import "mobx-react-lite/batchingForReactNative";
-import HeaderTitleLogo from "./src/common/HeaderTitleLogo";
-
-function PlayersScreen({ navigation }) {
-  return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Text>Players Screen</Text>
-    </View>
-  );
-}
 
 const App = observer(() => {
     
-  // const Drawer = createDrawerNavigator();
+  const Drawer = createDrawerNavigator();
   const scheme = useColorScheme();
   const appStateStore = useContext(AppState);
 
@@ -58,21 +51,11 @@ const App = observer(() => {
       <ThemeProvider theme={theme.colors}>
         <NavigationContainer theme={theme}>
           <StatusBar barStyle={statusBarStyle} />
-          <Menu option1={Dashboard} option2={Statistics} option3={PlayersScreen} />
-          {/* <Drawer.Navigator initialRouteName="Home"
-          drawerType= 'back'
-          drawerStyle={{ width: '60%' }}
-          overlayColor="rgba(15, 126, 0, 0.9)"
-          drawerContentOptions={{
-            drawerIcon: { focused: true, color: 'red', size: 30 },
-            activeTintColor: '#f1c100',
-            itemStyle: { marginVertical: 5 },
-          }}
-          >
-            <Drawer.Screen name="Home" component={Dashboard} />
-            <Drawer.Screen name="Statistics" component={Statistics} />
-            <Drawer.Screen name="Players" component={PlayersScreen} />
-          </Drawer.Navigator> */}
+          <Drawer.Navigator drawerContent={DrawerOptions} >
+            <Drawer.Screen name="Home" component={ Menu } />
+            {/* <Drawer.Screen name="Statistics" component={Statistics} />
+            <Drawer.Screen name="Players" component={Players} /> */}
+          </Drawer.Navigator>
         </NavigationContainer>
       </ThemeProvider>
     </AppearanceProvider>
